@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/products', [ProductController::class, 'index'])->name('products.index');
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+
+Route::get('/stripe', [PaymentController::class, 'showPaymentForm'])->name('stripe.paymentForm');
+Route::post('/stripe', [PaymentController::class, 'handlePayment'])->name('stripe.handlePayment');
